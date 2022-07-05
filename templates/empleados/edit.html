@@ -1,26 +1,55 @@
-
+{% include 'header.html' %}
 
 {% for empleado in empleados %}
 <form method="post" action="/update" enctype="multipart/form-data">
     
-    id:
-    <input type="text" value="{{empleado[0]}}" name="txtId" id="txtId">
-    <br>
+    <div class="card">
+        <div class="card-header">
+            Editar datos empleado
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Datos</h5>
+            <p class="card-text">
+                <div class="form-group">
+                    <label for="my-input"></label>
+                    <input id="txtId"  value="{{empleado[0]}}" class="form-control" type="hidden" name="txtId">
+                </div>
 
-    nombre:
-    <input type="text" value="{{empleado[1]}}" name="txtNombre" id="txtNombre">
-    <br>
+                <div class="form-group">
+                    <label for="my-input">Nombre</label>
+                    <input id="txtNombre"  value="{{empleado[1]}}" class="form-control" type="text" name="txtNombre">
+                </div>
+            
+                <div class="form-group">
+                    <label for="my-input">Correo</label>
+                    <input id="txtCorreo"  value="{{empleado[2]}}" class="form-control" type="text" name="txtCorreo">
+                </div>
 
-    Correo:
-    <input type="text" value="{{empleado[2]}}" name="txtCorreo" id="txtCorreo">
-    <br>
+                <div class="form-group">
+                    <label for="my-input">Foto</label>
+                    <img class="img-thumbnail" width="100px" src="{{ url_for('uploads', nombreFoto=empleado[3]) }}" alt="">
+                    <input id="txtCorreo"  value="{{empleado[2]}}" class="form-control" type="text" name="txtCorreo">
+                </div>
+            
+            
+            
+               
+            
+          
+                
+                <input type="submit" value="Editar">
 
-    Foto: {{empleado[3]}}
-    <input type="file" value="{{empleado[3]}}" name="txtFoto" id="txtFoto">
-    <br>
 
-    <input type="submit" value="Editar">
+
+
+            </p>
+        </div>
+    </div>
+    
+   
 </form>    
 
 
 {% endfor %}
+
+{% include 'footer.html'  %}

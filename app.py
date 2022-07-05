@@ -3,6 +3,7 @@ from flask import render_template , request , redirect
 from flaskext.mysql import MySQL
 from datetime import datetime
 import os
+from flask import send_from_directory , url_for
 
 app= Flask(__name__)
 
@@ -15,6 +16,10 @@ mysql.init_app(app)
 
 CARPETA = os.path.join('uploads')
 app.config['CARPETA']=CARPETA
+
+@app.route('/uploads/<nombreFoto>')
+def uploads(nombreFoto):
+    return send_from_directory(app.config['CARPETA'], nombreFoto)
 
 @app.route("/")
 def index():
@@ -105,7 +110,7 @@ def storage():
     cursor=conn.cursor()
     cursor.execute(sql, datos)
     conn.commit()
-    return render_template('empleados/index.html')
+    return redirect('/')
 
 
 
